@@ -28,13 +28,3 @@ void camcon2_build(Camcon2* camcon, mat4 mat) {
 	camcon2_build_scalerot(camcon, mat);
 	glm_mat4_mul(mat, translate, mat);
 }
-
-void camcon2_s2w(Camcon2* camcon, vec2 s, vec2 w) {
-	mat4 cam;
-	camcon2_build_scalerot(camcon, cam);
-	glm_mat4_inv(cam, cam);
-	vec4 s4 = {s[0], s[1], 0.0, 1.0};
-	glm_mat4_mulv(cam, s4, s4);
-	w[0] = s4[0] / s4[3];
-	w[1] = s4[1] / s4[3];
-}
