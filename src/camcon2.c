@@ -8,6 +8,15 @@ void camcon2_init(Camcon2* camcon) {
 	camcon->y = 0.0f;
 	camcon->theta = 0.0f;
 	camcon->k = 1.0f;
+	camcon->mirror = false;
+}
+
+void camcon2_rotate_view(Camcon2* camcon, float angle) {
+	if (camcon->mirror) {
+		camcon->theta -= angle;
+	} else {
+		camcon->theta += angle;
+	}
 }
 
 static void camcon2_build_scalerot(Camcon2* camcon, mat4 mat) {
@@ -18,6 +27,10 @@ static void camcon2_build_scalerot(Camcon2* camcon, mat4 mat) {
 	mat[1][1] = camcon->k * ct;
 	mat[0][1] = camcon->k * st;
 	mat[1][0] = camcon->k * -st;
+	if (camcon->mirror) {
+		mat[0][0] = -mat[0][0];
+		mat[1][0] = -mat[1][0];
+	}
 }
 
 void camcon2_build(Camcon2* camcon, mat4 mat) {
