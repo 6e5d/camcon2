@@ -19,7 +19,7 @@ void camcon2(rotate_view)(Camcon2()* camcon, float angle) {
 	}
 }
 
-static void build_scalerot(Camcon2()* camcon, CglmMat4 mat) {
+static void build_scalerot(Camcon2()* camcon, mat4 mat) {
 	glm_mat4_identity(mat);
 	float ct = cosf(camcon->theta);
 	float st = sinf(camcon->theta);
@@ -33,8 +33,8 @@ static void build_scalerot(Camcon2()* camcon, CglmMat4 mat) {
 	}
 }
 
-void camcon2(build)(Camcon2()* camcon, CglmMat4 mat) {
-	CglmMat4 translate;
+void camcon2(build)(Camcon2()* camcon, mat4 mat) {
+	mat4 translate;
 	glm_mat4_identity(translate);
 	translate[3][0] = camcon->x;
 	translate[3][1] = camcon->y;
